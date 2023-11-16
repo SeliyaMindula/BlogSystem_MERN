@@ -1,9 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import usersRouter from './routes/users';
+import postsRouter from './routes/posts';
+import categoriesRouter from './routes/categories';
+import tagsRouter from './routes/tags';
 
 dotenv.config();
-
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,8 +18,11 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
 app.use(express.json());
 
-
-app.use(express.json()); // For parsing application/json
+// Use routes
+app.use(usersRouter);
+app.use(postsRouter);
+app.use(categoriesRouter);
+app.use(tagsRouter);
 
 // Root Endpoint
 app.get('/', (req, res) => {
