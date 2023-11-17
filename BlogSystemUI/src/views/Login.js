@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import authService from "../services/authService"; 
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -7,8 +8,16 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle login logic here
-    // Use username, email, and password state variables
+    authService.login(username, email, password)
+      .then(response => {
+        // Handle successful login
+        // You might want to save the token, navigate to another page, etc.
+        console.log('Login successful', response.data);
+      })
+      .catch(error => {
+        // Handle login errors here
+        console.error('Login error', error.response.data);
+      });
   };
   
 

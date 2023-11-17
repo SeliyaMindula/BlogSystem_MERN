@@ -19,44 +19,6 @@ router.post('/users', async (req, res) => {
 });
 
 // POST /login - Authenticate a user
-/*router.post('/login', async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.body.email });
-    if (user && await bcrypt.compare(req.body.password, user.password)) {
-      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
-      res.status(200).json({ token, user });
-    } else {
-      res.status(401).json({ message: 'Invalid credentials' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});*/
-
-
-
-// router.post('/login', async (req, res) => {
-//   try {
-//     const user = await User.findOne({ email: req.body.email });
-//     if (!user) {
-//       return res.status(401).json({ message: 'Invalid credentials' });
-//     }
-
-//     console.log(`Found user: ${user.email}`); // Debugging line
-//     const isMatch = await bcrypt.compare(req.body.password, user.password);
-    
-//     if (isMatch) {
-//       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
-//       res.status(200).json({ token, user });
-//     } else {
-//       return res.status(401).json({ message: 'Invalid credentials' });
-//     }
-//   } catch (error) {
-//     console.error(error); // Log the full error
-//     res.status(500).json({ message: error.message });
-//   }
-// });
-
 router.post('/login', async (req, res) => {
   try {
     // Convert email to lowercase before querying the database
@@ -73,6 +35,9 @@ router.post('/login', async (req, res) => {
 
     const isMatch = await bcrypt.compare(req.body.password, user.password);
     console.log("Password match:", isMatch);  // Debugging line
+    console.log("Just password Variable:", req.body.password)
+    console.log("User.Password variable:", user.password)
+
 
     if (isMatch) {
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
