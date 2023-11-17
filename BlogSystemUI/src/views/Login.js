@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import authService from "../services/authService"; 
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,6 +18,7 @@ function Login() {
         // Handle successful login
         // You might want to save the token, navigate to another page, etc.
         console.log('Login successful', response.data);
+        navigate('/Home'); // Navigate to home page
       })
       .catch(error => {
         // Handle login errors here
