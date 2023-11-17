@@ -1,7 +1,7 @@
 // tags.js in the routes directory
 
 import express from 'express';
-import Tag from '../models/tag';
+import Tag from '../models/tags.js';
 
 const router = express.Router();
 

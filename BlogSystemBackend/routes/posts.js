@@ -1,8 +1,8 @@
 // posts.js in the routes directory
 
 import express from 'express';
-import Post from '../models/post';
-import authenticate from '../middleware/authenticate'; // Assuming you have authentication middleware
+import Post from '../models/posts.js';
+import authenticate from '../middleware/authenticate.js'; // Assuming you have authentication middleware
 
 const router = express.Router();
 

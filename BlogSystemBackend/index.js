@@ -1,15 +1,16 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import usersRouter from './routes/users';
-import postsRouter from './routes/posts';
-import categoriesRouter from './routes/categories';
-import tagsRouter from './routes/tags';
+import usersRouter from './routes/users.js'
+import postsRouter from './routes/posts.js';
+import categoriesRouter from './routes/categories.js';
+import tagsRouter from './routes/tags.js';
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
