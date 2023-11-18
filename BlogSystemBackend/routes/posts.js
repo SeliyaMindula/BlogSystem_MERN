@@ -4,57 +4,65 @@ import express from 'express';
 import Post from '../models/posts.js';
 import authenticate from '../middleware/authenticate.js';
 import Tag from '../models/tags.js'
+import Category from '../models/categories.js';
 
 const router = express.Router();
 
-// POST /posts - Create a new post (authentication required)
-// router.post('/posts', authenticate, async (req, res) => {
-//   try {
-//     const post = new Post({ ...req.body, author: req.user._id });
-//     await post.save();
-//     res.status(201).json(post);
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// });
+
 
 router.post('/posts', authenticate, async (req, res) => {
   try {
-    const tagNames = req.body.tags; // Assuming tag names are sent
+    // Handle tags
+    const tagIds = req.body.tags && Array.isArray(req.body.tags) ? 
+      await Promise.all(req.body.tags.map(async (name) => {
+        let tag = await Tag.findOne({ name });
+        if (!tag) {
+          tag = new Tag({ name });
+          await tag.save();
+        }
+        return tag._id;
+      })) : [];
 
-    // Find or create tags and get their IDs
-    const tagIds = await Promise.all(tagNames.map(async (name) => {
-      let tag = await Tag.findOne({ name });
-      if (!tag) {
-        // Optionally create a new tag if it doesn't exist
-        tag = new Tag({ name });
-        await tag.save();
-      }
-      return tag._id;
-    }));
+    // Handle categories
+    const categoryIds = req.body.categories && Array.isArray(req.body.categories) ? 
+      await Promise.all(req.body.categories.map(async (name) => {
+        let category = await Category.findOne({ name });
+        if (!category) {
+          category = new Category({ name });
+          await category.save();
+        }
+        return category._id;
+      })) : [];
 
-    // Create the post with the ObjectId of the tags
+    // Create new post with both tags and categories
     const post = new Post({ 
       ...req.body, 
       author: req.user._id, 
-      tags: tagIds 
+      tags: tagIds,
+      categories: categoryIds
     });
 
     await post.save();
-    res.status(201).json(post);
+
+    // Populate the post with category and tag details
+    const populatedPost = await Post.findById(post._id)
+      .populate('categories', 'name') // Populate categories with their names
+      .populate('tags', 'name'); // Populate tags with their names
+
+    res.status(201).json(populatedPost);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 });
 
 
-
-
-// GET /posts - Retrieve all posts
 router.get('/posts', async (req, res) => {
   try {
-    const posts = await Post.find().populate('author');
-    res.status(200).json(posts);
+    const posts = await Post.find({})
+      .populate('categories', 'name') // Populate category names
+      .populate('tags', 'name');      // Populate tag names
+
+    res.json(posts);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

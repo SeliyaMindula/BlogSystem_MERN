@@ -44,6 +44,16 @@ const login = (username, email, password) => {
     });
   };
 
+  const getPosts = () => {
+    const token = localStorage.getItem('token'); 
+    return axios.get(API_URL + 'posts', {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      },
+    });
+  };
+  
+
 export default {
-  register, login, createPost,
+  register, login, createPost, getPosts,
 };

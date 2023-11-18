@@ -6,8 +6,7 @@ import Header from '../components/Header';
 function PostCreationForm() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [category, setCategory] = useState('');
- // const [author, setAuthor] = useState(''); 
+  const [categories, setCategories] = useState(''); // Renamed to categories
   const [tags, setTags] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -16,13 +15,12 @@ function PostCreationForm() {
   const resetForm = () => {
     setTitle('');
     setContent('');
-   // setAuthor('');
-    setCategory('');
+    setCategories('');
     setTags('');
   };
 
   const validateForm = () => {
-    if (!title || !content || !category) {
+    if (!title || !content || !categories) {
       setErrorMessage('Please fill in all fields');
       return false;
     }
@@ -33,9 +31,9 @@ function PostCreationForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-        const tagArray = tags.split(',').map(tag => tag.trim());
-        const categoryArray = category.split(',').map(cat => cat.trim()); 
-        const newPost = { title, content, category: categoryArray, tags: tagArray }; 
+      const tagArray = tags.split(',').map(tag => tag.trim());
+      const categoryArray = categories.split(',').map(cat => cat.trim()); 
+      const newPost = { title, content, categories: categoryArray, tags: tagArray }; // Updated key to categories
 
       authService.createPost(newPost).then(response => {
         setSuccessMessage('Post created successfully!');
@@ -76,14 +74,14 @@ function PostCreationForm() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="postCategory" className="form-label">Category</label>
+          <label htmlFor="postCategories" className="form-label">Categories</label>
           <input 
             type="text" 
             className="form-control" 
-            id="postCategory"
-            value={category} 
-            onChange={e => setCategory(e.target.value)} 
-            placeholder="Enter the category of the post" 
+            id="postCategories"
+            value={categories} 
+            onChange={e => setCategories(e.target.value)} 
+            placeholder="Enter categories, separated by commas" 
           />
         </div>
         {/* <div className="mb-3">
