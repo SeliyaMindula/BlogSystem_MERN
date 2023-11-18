@@ -23,6 +23,20 @@ function Home() {
     return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
   };
 
+  const handleDelete = (postId) => {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      authService.deletePost(postId)
+        .then(() => {
+          // Remove the post from the state to update UI
+          setPosts(posts.filter(post => post._id !== postId));
+        })
+        .catch(error => {
+          console.error("Error deleting post:", error);
+        });
+    }
+  };
+  
+
   return (
     <div>
       <Header />
@@ -72,8 +86,10 @@ function Home() {
               </div>
               {/* <button className="btn btn-primary me-2" onClick={() => handleUpdate(post._id)}>Update</button>
               <button className="btn btn-danger" onClick={() => handleDelete(post._id)}>Delete</button> */}
+              <div className="pt-2">
               <button className="btn btn-primary me-2" >Update</button>
-              <button className="btn btn-danger" >Delete</button>
+              <button className="btn btn-danger" onClick={() => handleDelete(post._id)}>Delete</button>
+              </div>
             </div>
           </div>
         ))}

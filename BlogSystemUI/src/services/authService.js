@@ -52,8 +52,22 @@ const login = (username, email, password) => {
       },
     });
   };
+
+  const deletePost = (postId) => {
+    const token = localStorage.getItem('token'); 
+    return axios.delete(API_URL + `posts/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      },
+    });
+  };
+
+  // const deletePost = (postId) => {
+  //   const token = localStorage.getItem('token'); 
+  //   return axios.delete(`posts/${postId}`);
+  // };
   
 
 export default {
-  register, login, createPost, getPosts,
+  register, login, createPost, getPosts, deletePost,
 };

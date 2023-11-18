@@ -55,7 +55,7 @@ router.post('/posts', authenticate, async (req, res) => {
   }
 });
 
-
+// GET posts
 router.get('/posts', async (req, res) => {
   try {
     const posts = await Post.find({})
@@ -67,6 +67,23 @@ router.get('/posts', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+// DELETE /posts/:id - Delete a post by ID
+router.delete('/posts/:id', authenticate, async (req, res) => {
+  try {
+    const result = await Post.deleteOne({ _id: req.params.id });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    res.status(200).json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 
 // GET /posts/:id - Retrieve a single post by ID
 router.get('/posts/:id', async (req, res) => {
