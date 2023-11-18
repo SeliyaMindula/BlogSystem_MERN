@@ -77,11 +77,11 @@ function Home() {
               </div>
   
               <div className="meta-style2 mt-3">
-                <span>
-                  <i className="fas fa-calendar-alt"></i> {formatTimestamp(post.createdAt)}
+              <span>
+                  <i className="fas fa-user"></i>- {post.author.username} -
                 </span>
                 <span>
-                  <i className="fas fa-user"></i> {post.author.username}
+                  <i className="fas fa-calendar-alt"></i> {formatTimestamp(post.createdAt)}
                 </span>
               </div>
               {/* <button className="btn btn-primary me-2" onClick={() => handleUpdate(post._id)}>Update</button>

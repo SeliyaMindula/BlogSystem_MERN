@@ -60,7 +60,8 @@ router.get('/posts', async (req, res) => {
   try {
     const posts = await Post.find({})
       .populate('categories', 'name') // Populate category names
-      .populate('tags', 'name');      // Populate tag names
+      .populate('tags', 'name')      // Populate tag names
+      .populate('author', 'username'); 
 
     res.json(posts);
   } catch (error) {
