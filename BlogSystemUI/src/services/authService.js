@@ -10,14 +10,6 @@ const register = (username, email, password) => {
   });
 };
 
-// const login = (username, email, password) => {
-//     return axios.post(API_URL + 'login', {
-//       username,
-//       email,
-//       password,
-//     });
-//   };
-
 const login = (username, email, password) => {
   return axios.post(API_URL + 'login', {
     username,
@@ -44,6 +36,7 @@ const login = (username, email, password) => {
     });
   };
 
+  // GET all post
   const getPosts = () => {
     const token = localStorage.getItem('token'); 
     return axios.get(API_URL + 'posts', {
@@ -53,6 +46,17 @@ const login = (username, email, password) => {
     });
   };
 
+  // GET post using ID
+  const getPost = (postId) => {
+    const token = localStorage.getItem('token');
+    return axios.get(API_URL + `posts/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    });
+  };
+
+  //delete post
   const deletePost = (postId) => {
     const token = localStorage.getItem('token'); 
     return axios.delete(API_URL + `posts/${postId}`, {
@@ -62,12 +66,16 @@ const login = (username, email, password) => {
     });
   };
 
-  // const deletePost = (postId) => {
-  //   const token = localStorage.getItem('token'); 
-  //   return axios.delete(`posts/${postId}`);
-  // };
+  //Update post
+  const updatePost = (postId, updatedData) => {
+    const token = localStorage.getItem('token');
+    return axios.put(API_URL + `posts/${postId}`, updatedData, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    });
+  };
   
-
 export default {
-  register, login, createPost, getPosts, deletePost,
+  register, login, createPost, getPosts, deletePost,getPost,updatePost,
 };

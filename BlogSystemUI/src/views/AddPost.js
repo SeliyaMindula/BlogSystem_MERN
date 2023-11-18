@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import authService from '../services/authService';
-import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 
 function PostCreationForm() {
@@ -10,7 +9,6 @@ function PostCreationForm() {
   const [tags, setTags] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const navigate = useNavigate();
 
   const resetForm = () => {
     setTitle('');
@@ -48,9 +46,10 @@ function PostCreationForm() {
   return (
     <>
     <Header/>
+    <h2 className='text-center pt-4'>Add Your Post</h2>
       {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
       {successMessage && <div className="alert alert-success">{successMessage}</div>}
-      <div className="container mt-5">  
+      <div className="container mt-4">  
       <form onSubmit={handleSubmit} className="mb-3 p-4 border rounded">
         <div className="mb-3">
           <label htmlFor="postTitle" className="form-label">Title</label>

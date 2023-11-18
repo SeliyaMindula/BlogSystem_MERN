@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import authService from "../services/authService";
+import { useNavigate } from 'react-router-dom';
 import "./Home.css";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate()
+
+  const handleUpdateClick = (postId) => {
+    navigate(`/Updatepost/${postId}`);
+  };
+
+  // const handleUpdateClick = () => {
+  //   navigate(`/Updatepost`);
+  // };
 
   useEffect(() => {
     authService
@@ -87,7 +97,7 @@ function Home() {
               {/* <button className="btn btn-primary me-2" onClick={() => handleUpdate(post._id)}>Update</button>
               <button className="btn btn-danger" onClick={() => handleDelete(post._id)}>Delete</button> */}
               <div className="pt-2">
-              <button className="btn btn-primary me-2" >Update</button>
+              <button className="btn btn-primary me-2" onClick={() => handleUpdateClick(post._id)}>Update</button>
               <button className="btn btn-danger" onClick={() => handleDelete(post._id)}>Delete</button>
               </div>
             </div>
