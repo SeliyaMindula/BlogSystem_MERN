@@ -53,9 +53,9 @@ function Home() {
       <div className="container">
         <h1 className="text-center my-4">Welcome to My Blog Page!</h1>
         <p className="text-center">Explore the latest posts below.</p>
-  
+        <div className="row">
         {posts.map((post) => (
-          <div className="col-md-12 col-lg-12 mt-5" key={post._id}>
+          <div className="col-md-6 col-lg-6 mt-5" key={post._id}>
             <div className="blog-card p-4">
               <h3 className="blog-title text-center mb-3">{post.title}</h3>
               <p className="blog-content">{post.content}</p>
@@ -104,6 +104,7 @@ function Home() {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }

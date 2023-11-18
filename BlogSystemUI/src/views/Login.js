@@ -63,7 +63,7 @@ function Login() {
         <div className="col-md-6 offset-md-3">
         <h1 className="text-center pb-2">Login Form</h1>
           {loginError && <div className="alert alert-danger">{loginError}</div>}
-          <form onSubmit={handleSubmit} className="p-4 border rounded">
+          <form onSubmit={handleSubmit} className="p-4 border rounded bg-white">
             
             {/* Username Field */}
             <label className="form-label" htmlFor="formUsername">Username</label>

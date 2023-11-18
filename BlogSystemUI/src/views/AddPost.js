@@ -50,7 +50,7 @@ function PostCreationForm() {
       {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
       {successMessage && <div className="alert alert-success">{successMessage}</div>}
       <div className="container mt-4">  
-      <form onSubmit={handleSubmit} className="mb-3 p-4 border rounded">
+      <form onSubmit={handleSubmit} className="mb-3 p-4 border rounded bg-white">
         <div className="mb-3">
           <label htmlFor="postTitle" className="form-label">Title</label>
           <input 

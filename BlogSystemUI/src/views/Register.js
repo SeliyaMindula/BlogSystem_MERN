@@ -80,7 +80,7 @@ function Register() {
           )}
           
 
-          <form onSubmit={handleSubmit} className="p-4 border rounded">
+          <form onSubmit={handleSubmit} className="p-4 border rounded bg-white">
             <div className="form-outline mb-4">
               <input
                 type="text"
