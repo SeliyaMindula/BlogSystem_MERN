@@ -10,14 +10,40 @@ const register = (username, email, password) => {
   });
 };
 
+// const login = (username, email, password) => {
+//     return axios.post(API_URL + 'login', {
+//       username,
+//       email,
+//       password,
+//     });
+//   };
+
 const login = (username, email, password) => {
-    return axios.post(API_URL + 'login', {
-      username,
-      email,
-      password,
+  return axios.post(API_URL + 'login', {
+    username,
+    email,
+    password,
+  }).then(response => {
+    if (response.data.token) {
+      localStorage.setItem('token', response.data.token);
+    }
+    return response; 
+  }).catch(error => {
+    console.error("Login error:", error);
+    throw error; 
+  });
+};
+
+
+  const createPost = (postData) => {
+    const token = localStorage.getItem('token'); 
+    return axios.post(API_URL + 'posts', postData, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
     });
   };
 
 export default {
-  register, login,
+  register, login, createPost,
 };
