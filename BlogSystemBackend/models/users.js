@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-  // Add other fields if needed, such as a profile picture, bio, etc.
 });
 
 // Pre-save hook to hash password before saving a user document

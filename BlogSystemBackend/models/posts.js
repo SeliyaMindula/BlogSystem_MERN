@@ -22,7 +22,6 @@ const postSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Tag'
   }]
-  // Include other fields like timestamps, comments, etc.
 }, { timestamps: true });
 
 const Post = mongoose.model('Post', postSchema);

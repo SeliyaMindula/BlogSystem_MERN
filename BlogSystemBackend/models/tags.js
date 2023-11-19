@@ -6,7 +6,6 @@ const tagSchema = new mongoose.Schema({
     required: true,
     unique: true
   }
-  // Tags may not need additional fields, but can be expanded if necessary
 });
 
 const Tag = mongoose.model('Tag', tagSchema);

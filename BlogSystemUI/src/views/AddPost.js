@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import authService from '../services/authService';
 import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
 
 function PostCreationForm() {
   const [title, setTitle] = useState('');
@@ -9,6 +10,8 @@ function PostCreationForm() {
   const [tags, setTags] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  
+  const navigate = useNavigate();
 
   const resetForm = () => {
     setTitle('');
@@ -35,8 +38,8 @@ function PostCreationForm() {
 
       authService.createPost(newPost).then(response => {
         setSuccessMessage('Post created successfully!');
+        navigate('/Home');
         resetForm();
-        // navigate('/posts'); // Uncomment to navigate after post creation
       }).catch(error => {
         setErrorMessage(error.response?.data?.message || 'Error creating post');
       });
