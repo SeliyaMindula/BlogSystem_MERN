@@ -51,7 +51,7 @@ function Home() {
     <div>
       <Header />
       <div className="container">
-        <h1 className="text-center my-4">Welcome to My Blog Page!</h1>
+        <h1 className="text-center my-4">Welcome to TheBlogNest Hub!</h1>
         <p className="text-center">Explore the latest posts below.</p>
         <div className="row">
         {posts.map((post) => (

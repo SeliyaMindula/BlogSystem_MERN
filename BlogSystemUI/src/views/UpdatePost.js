@@ -61,7 +61,7 @@ function UpdatePost() {
         <h2 className='text-center pt-4'>Update Your Post</h2>
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         {successMessage && <div className="alert alert-success">{successMessage}</div>}
-        <form onSubmit={handleSubmit} className="mb-3 p-4 border rounded">
+        <form onSubmit={handleSubmit} className="mb-3 p-4 border rounded bg-white">
           <div className="mb-3">
             <label htmlFor="postTitle" className="form-label">Title</label>
             <input 
